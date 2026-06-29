@@ -7,6 +7,8 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -30,7 +32,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 @EventBusSubscriber(modid = StormCapeMod.MOD_ID)
 public final class StormNetwork {
     private static final int LIGHTNING_COOLDOWN_TICKS = 30; // 1.5s between bolts
-    private static final double REACH = 24.0;
+    private static final double REACH = 48.0;
 
     private StormNetwork() {}
 
@@ -64,11 +66,22 @@ public final class StormNetwork {
                 return;
             }
 
-            // Aim a ray from the eyes; strike where it hits the ground (or the far point ahead).
+            // Aim a ray from the eyes. If it hits a block, strike there. If it sails over/past the
+            // terrain (you're looking level or far), drop straight down to the ground at the aimed
+            // column so the bolt always lands on something — otherwise it'd spawn floating in the
+            // air far away and do nothing (which made the effect seem limited to close range).
             Vec3 eye = player.getEyePosition();
             Vec3 end = eye.add(player.getLookAngle().scale(REACH));
             BlockHitResult hit = level.clip(new ClipContext(eye, end, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, player));
-            Vec3 target = hit.getType() == HitResult.Type.BLOCK ? hit.getLocation() : end;
+            Vec3 target;
+            if (hit.getType() == HitResult.Type.BLOCK) {
+                target = hit.getLocation();
+            } else {
+                int gx = Mth.floor(end.x);
+                int gz = Mth.floor(end.z);
+                int gy = level.getHeight(Heightmap.Types.MOTION_BLOCKING, gx, gz);
+                target = new Vec3(gx + 0.5, gy, gz + 0.5);
+            }
 
             LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
             if (bolt != null) {
