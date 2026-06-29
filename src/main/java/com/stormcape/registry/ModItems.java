@@ -2,6 +2,7 @@ package com.stormcape.registry;
 
 import com.stormcape.StormCapeMod;
 import com.stormcape.StormStaffItem;
+import java.util.Map;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
@@ -9,10 +10,13 @@ import net.minecraft.util.Unit;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.minecraft.world.item.equipment.Equippable;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -29,6 +33,22 @@ public final class ModItems {
      */
     public static final ResourceKey<EquipmentAsset> STORM_CAPE_ASSET =
             ResourceKey.create(EquipmentAssets.ROOT_ID, StormCapeMod.id("storm_cape"));
+
+    /** Equipment asset for the helmet's worn (armor) texture. The yellow lightning "horns" are
+     *  extra 3D geometry drawn by {@link com.stormcape.client.StormHelmetHornsLayer}. */
+    public static final ResourceKey<EquipmentAsset> STORM_HELMET_ASSET =
+            ResourceKey.create(EquipmentAssets.ROOT_ID, StormCapeMod.id("storm_helmet"));
+
+    /** Custom armor material for the helmet (iron-ish protection, our own texture). */
+    public static final ArmorMaterial STORM_ARMOR = new ArmorMaterial(
+            220,                                  // base durability
+            Map.of(ArmorType.HELMET, 2),          // 2 armor points (like iron helmet)
+            12,                                    // enchantment value
+            SoundEvents.ARMOR_EQUIP_IRON,
+            0.0F,                                  // toughness
+            0.0F,                                  // knockback resistance
+            Tags.Items.INGOTS_COPPER,             // repair with copper
+            STORM_HELMET_ASSET);
 
     // Elytra-like cape: GLIDER makes it glide; EQUIPPABLE (chest slot) makes it wearable.
     public static final DeferredItem<Item> STORM_CAPE = ITEMS.registerItem(
@@ -52,6 +72,13 @@ public final class ModItems {
             "storm_staff",
             StormStaffItem::new,
             () -> new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
+
+    // The Storm Helmet: standard head armor with our black/blue texture; the yellow lightning horns
+    // are rendered by a custom layer (StormHelmetHornsLayer).
+    public static final DeferredItem<Item> STORM_HELMET = ITEMS.registerItem(
+            "storm_helmet",
+            Item::new,
+            () -> new Item.Properties().rarity(Rarity.EPIC).humanoidArmor(STORM_ARMOR, ArmorType.HELMET));
 
     private ModItems() {}
 

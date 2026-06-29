@@ -11,10 +11,15 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
-/** Client-only mod-bus events: add the Storm Cape wings layer to every player skin renderer. */
+/** Client-only mod-bus events: register the horns model and add our render layers to players. */
 @EventBusSubscriber(modid = StormCapeMod.MOD_ID, value = Dist.CLIENT)
 public final class StormCapeClientEvents {
     private StormCapeClientEvents() {}
+
+    @SubscribeEvent
+    public static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(StormHornsModel.LAYER, StormHornsModel::createLayer);
+    }
 
     @SubscribeEvent
     public static void onAddLayers(EntityRenderersEvent.AddLayers event) {
@@ -22,6 +27,7 @@ public final class StormCapeClientEvents {
             AvatarRenderer<AbstractClientPlayer> renderer = event.getPlayerRenderer(skin);
             if (renderer != null) {
                 renderer.addLayer(new StormCapeWingsLayer<AvatarRenderState, PlayerModel>(renderer, event.getEntityModels()));
+                renderer.addLayer(new StormHelmetHornsLayer<AvatarRenderState, PlayerModel>(renderer, event.getEntityModels()));
             }
         }
     }
