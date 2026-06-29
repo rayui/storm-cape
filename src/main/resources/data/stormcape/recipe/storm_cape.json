@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+        "E": "minecraft:elytra",
+        "C": "minecraft:copper_ingot",
+        "A": "minecraft:amethyst_shard"
+    },
+    "pattern": [
+        "ACA",
+        "CEC",
+        "ACA"
+    ],
+    "result": {
+        "count": 1,
+        "id": "stormcape:storm_cape"
+    }
+}
