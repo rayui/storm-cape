@@ -15,6 +15,7 @@ public final class StormCapeModEvents {
     public static void onBuildCreativeTabs(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             event.accept(ModItems.STORM_CAPE.get());
+            event.accept(ModItems.STORM_STAFF.get());
         }
     }
 }

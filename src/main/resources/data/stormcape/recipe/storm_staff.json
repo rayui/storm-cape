@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+        "A": "minecraft:amethyst_shard",
+        "C": "minecraft:copper_ingot"
+    },
+    "pattern": [
+        " A ",
+        " C ",
+        " C "
+    ],
+    "result": {
+        "count": 1,
+        "id": "stormcape:storm_staff"
+    }
+}
