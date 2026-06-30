@@ -1,21 +1,46 @@
-# Storm Cape ⚡🔵
+# Storm Set ⚡🔵
 
-A NeoForge mod for **Minecraft 1.21.11** that adds the **Storm Cape** — an elytra-like cape, 50% bigger than a normal elytra, that crackles with electricity.
+A NeoForge mod for **Minecraft 1.21.11** that adds the **Storm Set** — electric-blue gear that crackles with lightning. Three pieces: the **Storm Cape**, the **Storm Helmet**, and the **Storm Staff**.
 
 > Designed by a kid, built together. 💙
 
-## Features
-- **Glides like an elytra**, but the wings render **1.5× bigger** with a custom electric-blue texture.
+## The Set
+
+### ⚡ Storm Cape
+An elytra-like cape that glides like an elytra, but the wings render **1.5× bigger** with a custom electric-blue texture.
 - **Electric sparks** trail behind you while you fly.
 - A **blue soul-torch glow** swirls around you whenever it's worn.
 - **Electrocutes** any mob or player that touches you — 2 hearts per zap, with a short cooldown.
-- **Craftable** (elytra + copper + amethyst) and available in the **Combat** creative tab.
+
+### 🪖 Storm Helmet
+Head armor (iron-level protection, repairs with copper) with a black-and-blue texture and glowing yellow **lightning horns** that tilt with your head.
+
+### 🔱 Storm Staff
+- **Right-click** — a firework-style speed boost (much stronger while gliding with the Cape), with blue and yellow sparks trailing behind.
+- **Left-click** — shoot **lightning** that strikes the ground at any range.
+
+All three are **EPIC** rarity and show up in the **Combat** creative tab.
 
 ## Crafting
+
+**Storm Cape** — elytra + copper + amethyst
 ```
 A C A      A = Amethyst Shard
 C E C      C = Copper Ingot
 A C A      E = Elytra
+```
+
+**Storm Helmet**
+```
+A C A      A = Amethyst Shard
+C   C      C = Copper Ingot
+```
+
+**Storm Staff**
+```
+  A        A = Amethyst Shard
+  C        C = Copper Ingot
+  C
 ```
 
 ## Build
