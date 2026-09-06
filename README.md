@@ -1,6 +1,6 @@
 # Storm Set ⚡🔵
 
-A NeoForge mod for **Minecraft 1.21.11** that adds the **Storm Set** — electric-blue gear that crackles with lightning. Three pieces: the **Storm Cape**, the **Storm Helmet**, and the **Storm Staff**.
+A NeoForge mod for **Minecraft 26.2** that adds the **Storm Set** — electric-blue gear that crackles with lightning. Three pieces: the **Storm Cape**, the **Storm Helmet**, and the **Storm Staff**.
 
 > Designed by a kid, built together. 💙
 
